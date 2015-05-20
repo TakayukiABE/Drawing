@@ -13,6 +13,7 @@
 		6F47459A1B0C5D5A001585B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F4745991B0C5D5A001585B2 /* Images.xcassets */; };
 		6F47459D1B0C5D5A001585B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F47459B1B0C5D5A001585B2 /* LaunchScreen.xib */; };
 		6F4745A91B0C5D5A001585B2 /* DrawingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4745A81B0C5D5A001585B2 /* DrawingTests.swift */; };
+		6F4745B31B0C8392001585B2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4745B21B0C8392001585B2 /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		6F4745A21B0C5D5A001585B2 /* DrawingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F4745A71B0C5D5A001585B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F4745A81B0C5D5A001585B2 /* DrawingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTests.swift; sourceTree = "<group>"; };
+		6F4745B21B0C8392001585B2 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				6F4745921B0C5D5A001585B2 /* AppDelegate.swift */,
 				6F4745941B0C5D5A001585B2 /* ViewController.swift */,
 				6F4745961B0C5D5A001585B2 /* Main.storyboard */,
+				6F4745B21B0C8392001585B2 /* CameraViewController.swift */,
 				6F4745991B0C5D5A001585B2 /* Images.xcassets */,
 				6F47459B1B0C5D5A001585B2 /* LaunchScreen.xib */,
 				6F4745901B0C5D5A001585B2 /* Supporting Files */,
@@ -214,6 +217,7 @@
 			files = (
 				6F4745951B0C5D5A001585B2 /* ViewController.swift in Sources */,
 				6F4745931B0C5D5A001585B2 /* AppDelegate.swift in Sources */,
+				6F4745B31B0C8392001585B2 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +347,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Drawing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -353,6 +358,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Drawing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

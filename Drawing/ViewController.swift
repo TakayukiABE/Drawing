@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var canvas: UIImageView!
     
     var lastDrawImage: UIImage!
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         bezierPath.lineWidth = 1.0
         bezierPath.moveToPoint(currentPoint)
     }
-
+    
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
         if bezierPath == nil {
             return
@@ -62,5 +62,5 @@ class ViewController: UIViewController {
         canvas.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
+    
 }
-
