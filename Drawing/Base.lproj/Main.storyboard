@@ -16,11 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hPV-M8-o9k">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hPV-M8-o9k">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hPV-M8-o9k" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="KgX-L3-uLz"/>
+                            <constraint firstItem="hPV-M8-o9k" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cVA-ye-sAr"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hPV-M8-o9k" secondAttribute="bottom" id="ob7-qV-CfB"/>
+                            <constraint firstAttribute="trailing" secondItem="hPV-M8-o9k" secondAttribute="trailing" id="xqb-Nn-9yF"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="canvas" destination="hPV-M8-o9k" id="mel-8Z-N4R"/>
