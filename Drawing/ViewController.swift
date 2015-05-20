@@ -30,5 +30,37 @@ class ViewController: UIViewController {
         bezierPath.moveToPoint(currentPoint)
     }
 
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if bezierPath == nil {
+            return
+        }
+        let touch = touches.first as! UITouch
+        let currentPoint:CGPoint = touch.locationInView(canvas)
+        bezierPath.addLineToPoint(currentPoint)
+        drawLine(bezierPath)
+    }
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if bezierPath == nil {
+            return
+        }
+        let touch = touches.first as! UITouch
+        let currentPoint:CGPoint = touch.locationInView(canvas)
+        bezierPath.addLineToPoint(currentPoint)
+        drawLine(bezierPath)
+        lastDrawImage = canvas.image
+    }
+    
+    func drawLine(path:UIBezierPath) {
+        UIGraphicsBeginImageContext(canvas.frame.size)
+        if lastDrawImage != nil {
+            lastDrawImage.drawAtPoint(CGPointZero)
+        }
+        var blackColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        blackColor.setStroke()
+        path.stroke()
+        canvas.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
 }
 
