@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     @IBOutlet weak var canvas: UIImageView!
     
     var image:UIImage!
@@ -19,13 +20,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func didTapCameraButton(sender: UIBarButtonItem) {
         self.pickImageFromCamera()
         self.pickImageFromLibrary()
-        
+        self.canvas.image = nil
+        self.lastDrawImage = nil
     }
     func pickImageFromCamera() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
@@ -48,7 +49,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             image = info[UIImagePickerControllerOriginalImage] as? UIImage
             println(image)
         }
-        self.view.backgroundColor = UIColor(patternImage: image)
+        
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        image.drawInRect(self.view.bounds)
+        var backgroundImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.view.backgroundColor = UIColor(patternImage: backgroundImage)
+        
+        
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -94,11 +102,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsEndImageContext()
     }
     
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
-        cameraViewController = segue.destinationViewController as? ViewController
-    }
-    
-    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+//        cameraViewController = segue.destinationViewController as? ViewController
+//    }
 }
