@@ -11,6 +11,7 @@ import AVFoundation
 
 class CameraViewController: UIViewController {
 
+    @IBOutlet weak var cameraView: UIImageView!
     var mySession : AVCaptureSession!
     var myDevice : AVCaptureDevice!
     var myImageOutput : AVCaptureStillImageOutput!
@@ -43,28 +44,29 @@ class CameraViewController: UIViewController {
         // セッションに追加.
         mySession.addOutput(myImageOutput)
         
-        // 画像を表示するレイヤーを生成.
+//        // 画像を表示するレイヤーを生成.
         let myVideoLayer : AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer.layerWithSession(mySession) as! AVCaptureVideoPreviewLayer
-        myVideoLayer.frame = self.view.bounds
-        myVideoLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        
+//        myVideoLayer.frame = self.view.bounds
+       // cameraView.videoGravity = AVLayerVideoGravityResizeAspectFill
         
         // Viewに追加.
-        self.view.layer.addSublayer(myVideoLayer)
+      //  self.view.layer.addSublayer(myVideoLayer)
         
         // セッション開始.
         mySession.startRunning()
         
         // UIボタンを作成.
-        let myButton = UIButton(frame: CGRectMake(0,0,120,50))
-        myButton.backgroundColor = UIColor.redColor();
-        myButton.layer.masksToBounds = true
-        myButton.setTitle("撮影", forState: .Normal)
-        myButton.layer.cornerRadius = 20.0
-        myButton.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.bounds.height-50)
-        myButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
-        
-        // UIボタンをViewに追加.
-        self.view.addSubview(myButton);
+//        let myButton = UIButton(frame: CGRectMake(0,0,120,50))
+//        myButton.backgroundColor = UIColor.redColor();
+//        myButton.layer.masksToBounds = true
+//        myButton.setTitle("撮影", forState: .Normal)
+//        myButton.layer.cornerRadius = 20.0
+//        myButton.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.bounds.height-50)
+//        myButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
+//        
+//        // UIボタンをViewに追加.
+//        self.view.addSubview(myButton);
         
     }
 
@@ -72,7 +74,11 @@ class CameraViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func onClickMyButton(sender: UIButton){
+    
+    
+    
+    
+    @IBAction func didTapShutterButton(sender: UIButton) {
         
         // ビデオ出力に接続.
         let myVideoConnection = myImageOutput.connectionWithMediaType(AVMediaTypeVideo)
@@ -90,4 +96,12 @@ class CameraViewController: UIViewController {
 
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func didTapBackButton(sender: UIButton) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    
 }

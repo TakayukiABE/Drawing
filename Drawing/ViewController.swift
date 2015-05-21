@@ -11,14 +11,45 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var canvas: UIImageView!
     
+    var image:UIImage!
     var lastDrawImage: UIImage!
     var bezierPath: UIBezierPath!
     
-    
+    var cameraViewController:ViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    @IBAction func didTapCameraButton(sender: UIBarButtonItem) {
+        self.pickImageFromCamera()
+        self.pickImageFromLibrary()
+        
+    }
+    func pickImageFromCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            let controller = UIImagePickerController()
+            controller.delegate = self
+            controller.sourceType = UIImagePickerControllerSourceType.Camera
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    func pickImageFromLibrary() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+            let controller = UIImagePickerController()
+            controller.delegate = self
+            controller.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        if info[UIImagePickerControllerOriginalImage] != nil {
+            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            println(image)
+        }
+        self.view.backgroundColor = UIColor(patternImage: image)
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -26,7 +57,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let currentPoint:CGPoint = touch.locationInView(canvas)
         bezierPath = UIBezierPath()
         bezierPath.lineCapStyle = kCGLineCapRound
-        bezierPath.lineWidth = 1.0
+        bezierPath.lineWidth = 10.0
         bezierPath.moveToPoint(currentPoint)
     }
     
@@ -62,5 +93,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         canvas.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+        cameraViewController = segue.destinationViewController as? ViewController
+    }
+    
     
 }
