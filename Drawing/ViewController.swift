@@ -10,17 +10,21 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var penSegment: UISegmentedControl!
+    @IBOutlet weak var penSizeSegment: UISegmentedControl!
     
     @IBOutlet weak var canvas: UIImageView!
-    
+    var undoStack: NSMutableArray!
+    var redoStack: NSMutableArray!
     var image:UIImage!
     var lastDrawImage: UIImage!
     var bezierPath: UIBezierPath!
     var penColor:UIColor = UIColor.blackColor()
+    var penSize:CGFloat = 10.0
     var cameraViewController:ViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        penSizeSegment.selectedSegmentIndex = 1
     }
     
     
@@ -29,11 +33,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         case 0: penColor = UIColor.blackColor()
         case 1: penColor = UIColor.whiteColor()
         case 2: penColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-        default: penColor = UIColor.blackColor()
+        default: break
         }
-        
     }
     
+    @IBAction func didChangePenSize(sender: UISegmentedControl) {
+        switch penSizeSegment.selectedSegmentIndex {
+        case 0: penSize = 5.0
+        case 1: penSize = 10.0
+        case 2: penSize = 20.0
+        default: break
+        }
+    }
     
     @IBAction func didTapCameraButton(sender: UIBarButtonItem) {
         self.pickImageFromCamera()
@@ -78,7 +89,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let currentPoint:CGPoint = touch.locationInView(canvas)
         bezierPath = UIBezierPath()
         bezierPath.lineCapStyle = kCGLineCapRound
-        bezierPath.lineWidth = 10.0
         bezierPath.moveToPoint(currentPoint)
     }
     
@@ -88,8 +98,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         let touch = touches.first as! UITouch
         let currentPoint:CGPoint = touch.locationInView(canvas)
-                bezierPath.strokeWithBlendMode(kCGBlendModeClear, alpha: 0.0)
+        bezierPath.strokeWithBlendMode(kCGBlendModeClear, alpha: 0.0)
         bezierPath.addLineToPoint(currentPoint)
+        bezierPath.lineWidth = penSize
         drawLine(bezierPath)
     }
     
@@ -103,6 +114,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bezierPath.addLineToPoint(currentPoint)
         drawLine(bezierPath)
         lastDrawImage = canvas.image
+       // undoStack.addObject(bezierPath)
+       // redoStack.removeAllObjects()
     }
     
     func drawLine(path:UIBezierPath) {
@@ -110,7 +123,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if lastDrawImage != nil {
             lastDrawImage.drawAtPoint(CGPointZero)
         }
-   //     var blackColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         penColor.setStroke()
         path.stroke()
         canvas.image = UIGraphicsGetImageFromCurrentImageContext()

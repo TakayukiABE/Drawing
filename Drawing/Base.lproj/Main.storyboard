@@ -24,15 +24,28 @@
                                 <items>
                                     <barButtonItem style="plain" id="c4U-IM-CCt">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Sri-8C-jlz">
-                                            <rect key="frame" x="179" y="546" width="242" height="29"/>
+                                            <rect key="frame" x="16" y="8" width="183" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="黒"/>
                                                 <segment title="白"/>
-                                                <segment title="消しゴム"/>
                                             </segments>
                                             <connections>
                                                 <action selector="didChangePenType:" destination="BYZ-38-t0r" eventType="valueChanged" id="6hT-cl-Bk3"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="q3A-5P-xoZ">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="I3g-QE-nkM">
+                                            <rect key="frame" x="209" y="8" width="241" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="小"/>
+                                                <segment title="中"/>
+                                                <segment title="大"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="didChangePenSize:" destination="BYZ-38-t0r" eventType="valueChanged" id="D7T-nD-uG3"/>
                                             </connections>
                                         </segmentedControl>
                                     </barButtonItem>
@@ -67,6 +80,7 @@
                     <connections>
                         <outlet property="canvas" destination="hPV-M8-o9k" id="mel-8Z-N4R"/>
                         <outlet property="penSegment" destination="Sri-8C-jlz" id="Cjc-lm-nRS"/>
+                        <outlet property="penSizeSegment" destination="I3g-QE-nkM" id="FsE-lB-wiy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
