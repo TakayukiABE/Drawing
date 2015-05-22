@@ -24,7 +24,7 @@
                                 <items>
                                     <barButtonItem style="plain" id="c4U-IM-CCt">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Sri-8C-jlz">
-                                            <rect key="frame" x="16" y="8" width="183" height="29"/>
+                                            <rect key="frame" x="16" y="8" width="250" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="黒"/>
@@ -35,9 +35,10 @@
                                             </connections>
                                         </segmentedControl>
                                     </barButtonItem>
+                                    <barButtonItem width="33" style="plain" systemItem="fixedSpace" id="Dw2-A6-D4X"/>
                                     <barButtonItem style="plain" id="q3A-5P-xoZ">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="I3g-QE-nkM">
-                                            <rect key="frame" x="209" y="8" width="241" height="30"/>
+                                            <rect key="frame" x="276" y="7" width="300" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="小"/>

@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var penSegment: UISegmentedControl!
     @IBOutlet weak var penSizeSegment: UISegmentedControl!
-    
     @IBOutlet weak var canvas: UIImageView!
     var undoStack: NSMutableArray!
     var redoStack: NSMutableArray!
@@ -21,12 +20,50 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var penColor:UIColor = UIColor.blackColor()
     var penSize:CGFloat = 10.0
     var cameraViewController:ViewController!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         penSizeSegment.selectedSegmentIndex = 1
     }
     
+    override func viewWillAppear(animated: Bool) {
+        undoStack = NSMutableArray()
+        redoStack = NSMutableArray()
+    }
+    
+//    @IBAction func didTapUndoButton(sender: UIButton) {
+//        println("undo button")
+//        println(undoStack)
+//        penColor = UIColor.clearColor()
+//        if undoStack.count != 0 {
+//            let undoPath: AnyObject? = undoStack.lastObject
+//            undoStack.removeLastObject()
+//            redoStack.addObject(undoPath!)
+//            lastDrawImage = nil
+//            canvas.image = nil
+//            for path in undoStack {
+//                if path is NSString {
+//                    lastDrawImage = nil
+//                } else {
+//                    drawLine((path as? UIBezierPath)!)
+//                    lastDrawImage = canvas.image
+//                }
+//            }
+//        }
+//    }
+    
+    
+//    @IBAction func didTapRedoButton(sender: UIButton) {
+//        if redoStack.count != 0 {
+//            let redoPath: UIBezierPath = (redoStack.lastObject as? UIBezierPath)!
+//            redoStack.removeLastObject()
+//            undoStack.addObject(redoPath)
+//            
+//            for path in undoStack {
+//                drawLine((path as? UIBezierPath)!)
+//                lastDrawImage = canvas.image
+//            }
+//        }
+//    }
     
     @IBAction func didChangePenType(sender: UISegmentedControl) {
         switch penSegment.selectedSegmentIndex {
@@ -114,8 +151,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bezierPath.addLineToPoint(currentPoint)
         drawLine(bezierPath)
         lastDrawImage = canvas.image
-       // undoStack.addObject(bezierPath)
-       // redoStack.removeAllObjects()
+        undoStack.addObject(bezierPath)
+        println("added to undoStack")
+        println(bezierPath)
+        redoStack.removeAllObjects()
     }
     
     func drawLine(path:UIBezierPath) {
@@ -132,6 +171,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func didTapTrashButton(sender: UIBarButtonItem) {
         self.canvas.image = nil
         self.lastDrawImage = nil
+        undoStack.removeAllObjects()
+        redoStack.removeAllObjects()
     }
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
 //        cameraViewController = segue.destinationViewController as? ViewController
